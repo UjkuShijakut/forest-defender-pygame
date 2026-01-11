@@ -1,3 +1,4 @@
+import os
 import pygame
 from settings import ASSETS_DIR
 
@@ -9,20 +10,18 @@ class AudioManager:
 
         self.music_volume = float(music_volume)
         self.sfx_volume = float(sfx_volume)
-
         self.current_music = None
         self.sfx = {}
-
         self.lose_channel = pygame.mixer.Channel(2)
 
     def load_sfx(self, name: str, filename: str, volume=None):
-        path = f"{ASSETS_DIR}/{filename}"
+        path = os.path.join(ASSETS_DIR, filename)
         sound = pygame.mixer.Sound(path)
         sound.set_volume(self.sfx_volume if volume is None else float(volume))
         self.sfx[name] = sound
 
     def play_music(self, filename: str, loop=True):
-        path = f"{ASSETS_DIR}/{filename}"
+        path = os.path.join(ASSETS_DIR, filename)
         if self.current_music == path:
             return
 

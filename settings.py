@@ -1,9 +1,15 @@
+import os
+import sys
+
+def resource_path(relative_path: str) -> str:
+    base_path = getattr(sys, "_MEIPASS", os.path.abspath("."))
+    return os.path.join(base_path, relative_path)
 
 WIDTH, HEIGHT = 900, 600
 FULLSCREEN = True
 FPS = 60
 
-ASSETS_DIR = "assets"
+ASSETS_DIR = resource_path("assets")
 
 PLAYER_SIZE = (44, 44)
 ENEMY_SIZE = (70, 70)
